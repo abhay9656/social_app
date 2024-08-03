@@ -5,7 +5,7 @@ const AddPost = () => {
   return (
     <View>
       <Text>
-        HEllo
+        Hello
       </Text>
     </View>
   )

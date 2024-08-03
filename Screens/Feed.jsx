@@ -5,7 +5,7 @@ const Feed = () => {
   return (
     <View>
       <Text>
-         Add 
+         Feed Screen
       </Text>
     </View>
   )
