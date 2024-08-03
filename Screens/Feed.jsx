@@ -1,20 +1,27 @@
 import React, { useState } from 'react'
 import {Text, View } from 'react-native'
 import { TextInput,Button } from 'react-native-paper'
+import { getFirestore } from 'firebase/firestore';
+import app from '../firebaseConfig';
+
+const db =getFirestore(app);
 
 const Feed = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
+    const publishPost = async()=>{
+      const docRef=await addDoc(collection(db,'posts'),{title,description})
+      console.log(docRef);
+    }
   return (
     <View>
       <Text>
          Feed Screen
-
       </Text>
-      <TextInput label={'Post Title'}></TextInput>
-      <TextInput label={'Post Description'}></TextInput>
-        <Button mode={'contained'}>Post</Button>
+      <TextInput onChangeText={setTitle} label={'Post Title'}></TextInput>
+      <TextInput onChangeText={setDescription} label={'Post Description'}></TextInput>
+        <Button onPress={publishPost} mode={'contained'}>Post</Button>
     </View>
   )
 }
