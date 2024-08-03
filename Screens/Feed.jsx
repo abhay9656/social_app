@@ -6,6 +6,7 @@ const Feed = () => {
     <View>
       <Text>
          Feed Screen
+         
       </Text>
     </View>
   )
