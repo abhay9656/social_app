@@ -23,10 +23,11 @@ const Feed = () => {
     })
     const onSubmit = (data) => {
       alert(JSON.stringify(data));
+      publishPost(data);
     }
 
-    const publishPost = async () =>{
-      const docRef=await addDoc(collection(db,'socialposts'),{title,description})
+    const publishPost = async (data) =>{
+      const docRef=await addDoc(collection(db,'socialposts'),data)
       console.log(docRef);
     }
   return (
@@ -35,35 +36,37 @@ const Feed = () => {
       <Controller
         control={control}
         rules={{
-          required: true,
+          required:{message:'Title is required',value:true},
         }}
-        render={( { onChange, onBlur, value  }) => (
+        render={( { field}) => (
          <TextInput
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
+            onBlur={field.onBlur}
+            onChangeText={field.onChange}
+            value={field.value}
             label={'Post Title'}
             error={errors.title}
           />
         )}
         name="title"
       />
-      
+      <Text>{errors.title?.message}</Text>
        <Controller
         control={control}
         rules={{
-          required: true,
+          required:{message:'Title is required',value:true},
         }}
-        render={( { onChange, onBlur, value  }) => (
+        render={( { field  }) => (
          <TextInput
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
+            onBlur={field.onBlur}
+            onChangeText={field.onChange}
+            value={field.value}
             label={'Post Description'}
+            error={errors.title}
           />
         )}
         name="description"
       />
+      <Text>{errors.title?.message}</Text>
       
       
         <Button onPress={handleSubmit(onSubmit)} mode={'contained'}>Post</Button>
