@@ -3,7 +3,7 @@ import {Text, View } from 'react-native'
 import { TextInput,Button } from 'react-native-paper'
 import { addDoc, collection, getFirestore } from 'firebase/firestore';
 import app from '../firebaseConfig';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
 const db =getFirestore(app);
 
@@ -29,6 +29,23 @@ const Feed = () => {
     }
   return (
     <View>
+      <Text>Add New Post</Text>
+      <Controller
+        control={control}
+        rules={{
+          required: true,
+        }}
+        render={( { onChange, onBlur, value  }) => (
+          <TextInput
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            label={'Post Title'}
+          />
+        )}
+        name="firstName"
+      />
+      {errors.firstName && <Text>This is required.</Text>}
       <TextInput onChangeText={setTitle} label={'Post Title'}></TextInput>
       <TextInput onChangeText={setDescription} label={'Post Description'}></TextInput>
         <Button onPress={publishPost} mode={'contained'}>Post</Button>
