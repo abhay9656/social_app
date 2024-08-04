@@ -11,7 +11,7 @@ const Feed = () => {
     const [description, setDescription] = useState('');
 
     const publishPost = async()=>{
-      const docRef=await addDoc(collection(db,'posts'),{title,description})
+      const docRef=await addDoc(collection(db,'socialposts'),{title,description})
       console.log(docRef);
     }
   return (
