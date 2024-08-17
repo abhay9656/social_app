@@ -12,7 +12,10 @@ const Feed = () => {
     // Fetch feed from
     const ref=collection(db,'socialpost');
     const snapshot =await getDocs(ref);
-    console.log(snapshot.docs);
+    const data = snapshot.docs.map(doc =>{
+      return {...doc.data(),id:doc.id}
+    })
+    console.log(data);
   }
 
   useEffect(() => {
