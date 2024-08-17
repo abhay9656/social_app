@@ -1,4 +1,4 @@
-import { collection, getFirestore } from 'firebase/firestore';
+import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { Text } from 'react-native-paper'
@@ -12,7 +12,7 @@ const Feed = () => {
     // Fetch feed from
     const ref=collection(db,'socialpost');
     const snapshot =await getDocs(ref);
-    console.log(snapshot);
+    console.log(snapshot.docs);
   }
 
   useEffect(() => {
