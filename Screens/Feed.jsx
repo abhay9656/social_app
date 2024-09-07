@@ -1,7 +1,7 @@
 
 import { collection, doc, getDoc, getDocs, getFirestore, setDoc } from 'firebase/firestore';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
 import app from '../firebaseConfig';
 import { Button, Card, IconButton } from 'react-native-paper';
 import Comments from './Comments';
@@ -66,7 +66,10 @@ const FeedCard = ({ data, feedList, setFeedList, index }) => {
 const tabs = ['Best Post', 'Latest Post', 'Trending Post'];
 
 const Tablist = () => {
-  return tabs.map((tab, index) => {})
+  return tabs.map((tab) => {
+    return <Button key={tab} mode='contained'>{tab}</Button>
+  })
+  
 }
 
 const Feed = () => {
@@ -111,7 +114,10 @@ const Feed = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Feed Page</Text>
+      <ScrollView horizontal={true} >
+        <Tablist />
+      </ScrollView>
+      
       {displayFeed()}
 
 
