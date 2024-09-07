@@ -55,7 +55,9 @@ export default function App() {
               iconName = focused ? 'plus-circle' : 'plus-circle-outline';
             }
             return <IconButton icon={iconName} size={size} color={focused ?'blue':'black'} />
-          }
+          },
+          tabBarActiveTintColor: 'blue',
+          tabBarInactiveTintColor: 'gray',
         }
       }}>
         <Tab.Screen name="Feed" component={Feed} options={{
