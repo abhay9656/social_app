@@ -3,7 +3,7 @@ import { collection, doc, getDoc, getDocs, getFirestore, setDoc } from 'firebase
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
 import app from '../firebaseConfig';
-import { Button, Card, IconButton } from 'react-native-paper';
+import { Avatar, Button, Card, IconButton } from 'react-native-paper';
 import Comments from './Comments';
 // import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 
@@ -30,7 +30,8 @@ const FeedCard = ({ data, feedList, setFeedList, index }) => {
 
   return <>
     <Card key={data.id} style={styles.card}>
-      <Card.Title title={data.title} subtitle={data.description} />
+      <Card.Title title={data.title} subtitle={data.description} 
+      left ={props => <Avatar.Image {...props} source ={{uri:data.image}}/>}/>
       <Text>{new Date(data.postedOn).toDateString()}</Text>
       <Card.Cover source={{ uri: data.image }} />
       <View style={styles.iconContainer}>
@@ -65,10 +66,19 @@ const FeedCard = ({ data, feedList, setFeedList, index }) => {
 
 const tabs = ['Best Post', 'Latest Post', 'Trending Post'];
 
-const Tablist = () => {
-  return tabs.map((tab) => {
-    return <Button key={tab} mode='contained'>{tab}</Button>
-  })
+const Tablist = ({active,setActive}) => {
+  
+    return <View style={{flexDirection:'row',gap:10,paddingVertical:20}}>
+      {
+        tabs.map((tab) => {
+          return <Button 
+          onPress={()=>setActive(tab)}
+          key={tab}
+          mode={active===tab?'contained':'outlined'}>{tab}</Button>
+        })
+      }
+    </View>
+  
   
 }
 
@@ -76,6 +86,7 @@ const Feed = () => {
 
   const [feedList, setFeedList] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
+  const [activeTab, setActiveTab] = useState('Best Post');  
 
   const bottomSheetRef = useRef(null);
 
@@ -114,9 +125,9 @@ const Feed = () => {
 
   return (
     <View style={styles.container}>
-      <ScrollView horizontal={true} >
-        <Tablist />
-      </ScrollView>
+      {/* <ScrollView horizontal={true} > */}
+        <Tablist  active={activeTab} setActive={setActiveTab}/>
+      {/* </ScrollView> */}
       
       {displayFeed()}
 
@@ -128,6 +139,10 @@ const Feed = () => {
 const styles = StyleSheet.create({
   card: {
     margin: 10
+  },
+  container: {
+    flex: 1,
+    padding: 10
   },
   iconContainer: {
     flexDirection: 'row',
