@@ -45,7 +45,19 @@ export default function App() {
     <NavigationContainer>
       <Signup visible={signupOpen} setVisible={setSignupOpen} openLogin={openLogin} />
       <Login visible={loginOpen} setVisible={setLoginOpen} openSignup={openSignup} />
-      <Tab.Navigator>
+      <Tab.Navigator screenOptions={({route})=>{
+        return {
+          tabBarIcon: ({focused, color, size})=>{
+            let iconName;
+            if(route.name === 'Feed'){
+              iconName = focused ? 'home' : 'home-outline';
+            }else if(route.name === 'Addpost'){
+              iconName = focused ? 'plus-circle' : 'plus-circle-outline';
+            }
+            return <IconButton icon={iconName} size={size} color={focused ?'blue':'black'} />
+          }
+        }
+      }}>
         <Tab.Screen name="Feed" component={Feed} options={{
           headerRight: () => !userLoggedIn ? <IconButton
             icon={'account-circle'}
