@@ -63,6 +63,12 @@ const FeedCard = ({ data, feedList, setFeedList, index }) => {
   </>
 }
 
+const tabs = ['Best Post', 'Latest Post', 'Trending Post'];
+
+const Tablist = () => {
+  return tabs.map((tab, index) => {})
+}
+
 const Feed = () => {
 
   const [feedList, setFeedList] = useState([]);
