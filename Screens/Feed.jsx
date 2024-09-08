@@ -22,10 +22,10 @@ const FeedCard = ({ data, feedList, setFeedList, index }) => {
 
 
   const likePost = async () => {
-
+    
     const ref = doc(db, 'socialpost', data.id);
     await setDoc(ref,
-      { likes: (data.likes ? data.likes : 0) + 1 },
+      { likes: (data.likes ? data.likes : 0) + (liked ? -1 :1) },
       { merge: true });
 
     const updateData = (await getDoc(ref)).data();
@@ -33,7 +33,7 @@ const FeedCard = ({ data, feedList, setFeedList, index }) => {
     const temp = feedList;
     temp[index] = { ...data, likes: updateData.likes };
     setFeedList([...temp]);
-
+    setLiked(!liked);
   }
 
   return <>
