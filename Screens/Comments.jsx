@@ -1,7 +1,7 @@
 import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore'
 import React, { useState } from 'react'
 import { Modal, StyleSheet, View } from 'react-native'
-import { Button, IconButton, Text, TextInput } from 'react-native-paper'
+import { Avatar, Button, IconButton, Text, TextInput } from 'react-native-paper'
 import app from '../firebaseConfig';
 
 const db = getFirestore(app);
@@ -30,10 +30,24 @@ const Comments = ({ visible, setVisible, postData, feedList, setFeedList, index 
                 <Text style={styles.headerTitle}>Comments</Text>
             </View>
 
-            <View>
+            <View style={{padding:20}}>
                 {
                     (postData.comments ? postData.comments : []).map((comment, index) => {
-                        return <Text key={index}>{comment}</Text>
+                        return  <View style={{marginBottom:10}}>
+                            <View style={styles.comment}>
+                            <Avatar.Image size={40} label={comment[0]}/>
+                            <View style={{flexDirection:'row',justifyContent:'space-between',flex:1}}>
+                                <View>
+                                    <Text style={{fontSize:16,fontWeight:'bold'}}>John Doe</Text>
+                                <Text key={index}>{comment}</Text>
+                                </View>
+                                
+                            <IconButton icon={'heart-outline'} iconColor='red' size={20}/>
+                            </View>
+                            
+                        </View> 
+                        <Text>Reply</Text>
+                        </View>
                     })
                 }
             </View>
@@ -71,6 +85,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginLeft: 10,
         alignSelf: 'center'
+    },
+    comment: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: 10,
+        marginBottom: 10,
+        gap: 10
     }
 })
 
