@@ -9,9 +9,17 @@ import Comments from './Comments';
 
 const db = getFirestore(app);
 
+// const formatDate=({date})=>{
+//    console.log(date);
+//    const result =useTimeAgo(date||new Date());
+//     return <Text>{result}</Text>
+// }
+
 const FeedCard = ({ data, feedList, setFeedList, index }) => {
 
   const [showComments, setShowComments] = useState(false);
+  const [liked, setLiked] = useState(false)
+
 
   const likePost = async () => {
 
@@ -32,15 +40,19 @@ const FeedCard = ({ data, feedList, setFeedList, index }) => {
     <Card key={data.id} style={styles.card}>
       <Card.Title 
       title={<Text style={{fontWeight:'bold'}}>{data.title}</Text>}
-       subtitle={data.description} 
-      left ={props => <Avatar.Image {...props} source ={{uri:data.image}}/>}/>
-      <Text>{new Date(data.postedOn).toDateString()}</Text>
+       subtitle={new Date (data.postedOn).toLocaleDateString()}
+      left ={props => <Avatar.Image {...props} source ={{uri:data.image}}/>}
+       right={props => <IconButton {...props} icon="dots-vertical"/>}
+      />
+      {/* <Text>{new Date (date.postedOn)}</Text> */}
+      {/* <Text>{new Date(data.postedOn).toDateString()}</Text> */}
       <Card.Cover source={{ uri: data.image }} />
       <View style={styles.iconContainer}>
         <View style={styles.iconButton}>
           <IconButton
+            iconColor='red'
             onPress={likePost}
-            icon="heart-outline"
+            icon={liked?"heart":"heart-outline"}
             mode="contained" />
           <Text>{data.likes ? data.likes : "0"}</Text>
         </View>
