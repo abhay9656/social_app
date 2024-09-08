@@ -30,7 +30,9 @@ const FeedCard = ({ data, feedList, setFeedList, index }) => {
 
   return <>
     <Card key={data.id} style={styles.card}>
-      <Card.Title title={data.title} subtitle={data.description} 
+      <Card.Title 
+      title={<Text style={{fontWeight:'bold'}}>{data.title}</Text>}
+       subtitle={data.description} 
       left ={props => <Avatar.Image {...props} source ={{uri:data.image}}/>}/>
       <Text>{new Date(data.postedOn).toDateString()}</Text>
       <Card.Cover source={{ uri: data.image }} />
