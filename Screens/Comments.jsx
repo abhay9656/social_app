@@ -1,7 +1,7 @@
 import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore'
 import React, { useState } from 'react'
 import { Modal, StyleSheet, View } from 'react-native'
-import { Button, Text, TextInput } from 'react-native-paper'
+import { Button, IconButton, Text, TextInput } from 'react-native-paper'
 import app from '../firebaseConfig';
 
 const db = getFirestore(app);
@@ -25,6 +25,11 @@ const Comments = ({ visible, setVisible, postData, feedList, setFeedList, index 
 
     return (
         <Modal visible={visible} onRequestClose={() => { setVisible(false) }} >
+            <View style={styles.header}>
+                <IconButton icon={'arrow-left'} onPress={()=>{setVisible(false)}}>Close</IconButton>
+                <Text style={styles.headerTitle}>Comments</Text>
+            </View>
+
             <View>
                 {
                     (postData.comments ? postData.comments : []).map((comment, index) => {
@@ -54,6 +59,18 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: 10
+    },
+    header: {
+        height: 60,
+       
+        flexDirection: 'row',
+        alignContent: 'center',
+    },
+    headerTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginLeft: 10,
+        alignSelf: 'center'
     }
 })
 
