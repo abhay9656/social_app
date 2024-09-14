@@ -21,7 +21,8 @@
       },
       "permissions": [
         "android.permission.RECORD_AUDIO"
-      ]
+      ],
+      "package": "com.abhay_native.social_app"
     },
     "web": {
       "favicon": "./assets/favicon.png"

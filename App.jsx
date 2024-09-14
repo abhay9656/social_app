@@ -11,8 +11,7 @@ import Login from './Screens/Login';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import app from './firebaseConfig';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en'
+
 
 TimeAgo.addDefaultLocale(en)
 
@@ -29,14 +28,7 @@ export default function App() {
   const [loginOpen, setLoginOpen] = useState(false);
   const [userLoggedIn, setUserLoggedIn] = useState(false);
 
-//   useEffect(()=>{
-//   if(runOnce.current){
-//     return;
-//   }
-//   TimeAgo.addDefaultLocale(en)
-//   runOnce.current=true;
 
-// },[])
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
