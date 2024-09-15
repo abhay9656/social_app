@@ -37,7 +37,7 @@ const Login = ({ visible, setVisible, openSignup }) => {
     return (
         <Modal visible={visible} onRequestClose={() => { setVisible(false) }}>
             <View>
-                <Text>Login</Text>
+                <Text style={{fontSize:24,textAlign:'center',marginTop:100,marginBottom:30,fontWeight:'bold'}}>Login</Text>
 
                 <Controller
                     control={control}
