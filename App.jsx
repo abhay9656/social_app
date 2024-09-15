@@ -13,8 +13,6 @@ import app from './firebaseConfig';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
-TimeAgo.addDefaultLocale(en)
-
 const auth = getAuth(app);
 const Tab = createBottomTabNavigator();
 
